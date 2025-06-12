@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BiblioSol.Domain\BiblioSol.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\Respositories\Notification\" />
+    <Folder Include="Interfaces\Respositories\Security\" />
+  </ItemGroup>
+
 </Project>
