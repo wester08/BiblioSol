@@ -33,6 +33,10 @@ namespace BiblioSol.Application.Services.Library.Category
             throw new NotImplementedException("Implementar la lógica de retorno de resultado de operación aquí.");
         }
 
+        public Task<OperationResult> AddCategoriaAsync(Categoria categoria)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<OperationResult> DeleteCategoriaAsync(int id)
         {
