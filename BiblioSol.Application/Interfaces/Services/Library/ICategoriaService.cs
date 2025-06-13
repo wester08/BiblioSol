@@ -1,9 +1,7 @@
-﻿
-
-using BiblioSol.Domain.Entities;
+﻿using BiblioSol.Domain.Entities;
 using BiblioSol.Domin.Base;
 
-namespace BiblioSol.Application.Services.Library
+namespace BiblioSol.Application.Interfaces.Services.Library
 {
     public interface ICategoriaService
     {

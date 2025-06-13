@@ -4,10 +4,9 @@
     {
 
         //COLOCAR SOLO LOS CAMPOS NECESARIOS PARA CREAR LA CATEGORIA.
-        public int IdCategoria { get; set; }
-        public string Descripcion { get; set; } = string.Empty;
-        public DateTime FechaCreacion { get; set; }
-        public string UsuarioCreacion { get; set; } = string.Empty;
+        public string descripcion { get; set; } = string.Empty;
+        public DateTime fechaCreacion { get; set; }
+        public int usuarioCreacionId { get; set; }
 
 
     }
