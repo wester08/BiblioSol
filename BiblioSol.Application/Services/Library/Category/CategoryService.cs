@@ -6,35 +6,49 @@ using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Application.Interfaces.Services.Library;
 using BiblioSol.Domain.Entities;
 using BiblioSol.Domin.Base;
+using Microsoft.Extensions.Logging;
 
 namespace BiblioSol.Application.Services.Library.Category
 {
     public class CategoryService : ICategoriaService
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        public CategoryService(ICategoriaRepository categoriaRepository)
+        private readonly ILogger _logger;
+        public CategoryService(ICategoriaRepository categoriaRepository, ILogger<CategoryService> logger)
         {
             _categoriaRepository = categoriaRepository;
+            _logger = logger;
         }
-        public async Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoria)
+        public async Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoriaAddDto)
         {
-            Categoria categoriaEntity = new Categoria
+            OperationResult operationResult = new OperationResult();
+
+            try
             {
+                _logger.LogInformation("Adding new category with description: {Description}", categoriaAddDto.descripcion);
+                if (categoriaAddDto is null)
+                {
+                    operationResult = OperationResult.Failure("CategoriaAddDto cannot be null.");
+                    return operationResult;
+                }
 
-                descripcion = categoria.descripcion,
-                fechaCreacion = categoria.fechaCreacion,
-                usuarioCrecaion = categoria.usuarioCreacionId
+                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaAddDto.descripcion) !=null)
+                {
+                    operationResult = OperationResult.Failure("Category already exists with the same description.");
+                    return operationResult;
+                }
 
-
-
-            };
- 
-            await _categoriaRepository.AddAsync(categoriaEntity);
-            throw new NotImplementedException("Implementar la lógica de retorno de resultado de operación aquí.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding category: {ex.Message}", ex);
+            }
+            return operationResult;
         }
 
         public Task<OperationResult> AddCategoriaAsync(Categoria categoria)
         {
+            
             throw new NotImplementedException();
         }
 
@@ -53,7 +67,7 @@ namespace BiblioSol.Application.Services.Library.Category
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> UpdateCategoriaAsync(Categoria categoria)
+        public Task<OperationResult> UpdateCategoriaAsync(CategoriaUpdateDto categoriaUpdateDto)
         {
             throw new NotImplementedException();
         }

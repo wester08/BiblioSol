@@ -1,14 +1,24 @@
 ﻿
+using BiblioSol.Application.DTOs.Library.Category;
 using BiblioSol.Domain.Entities;
 
 namespace BiblioSol.Application.Extentions.Library.Category
 {
     public static class CategoryExtension
     {
-        public static string ToDescriptionString(this Categoria category)
+        public static Categoria ToCategoriaFromCategoriaDto(this CategoriaAddDto categoryAddDto)
         {
-            return "Prueba";
-                }
+            return new Categoria
+            {
+                descripcion = categoryAddDto.descripcion,
+                fechaCreacion = categoryAddDto.fechaCreacion,
+                usuarioCreacionId = categoryAddDto.usuarioCreacionId
+
+
+            };
+        }
+
+
     
     }
 }

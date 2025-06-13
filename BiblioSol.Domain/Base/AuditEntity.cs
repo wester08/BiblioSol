@@ -6,7 +6,7 @@ namespace BiblioSol.Domain.Base
     {
         public bool isActive { get; set; }
         public DateTime fechaCreacion { get; set; }
-        public int usuarioCrecaion { get; set; }
+        public int usuarioCreacionId { get; set; }
         public DateTime? fechaModificacion { get; set; }
         public int? usuarioModificacionId { get; set; }
 
