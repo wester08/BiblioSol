@@ -6,6 +6,7 @@ using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Application.Interfaces.Services.Library;
 using BiblioSol.Domain.Entities;
 using BiblioSol.Domin.Base;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace BiblioSol.Application.Services.Library.Category
@@ -14,10 +15,14 @@ namespace BiblioSol.Application.Services.Library.Category
     {
         private readonly ICategoriaRepository _categoriaRepository;
         private readonly ILogger _logger;
-        public CategoryService(ICategoriaRepository categoriaRepository, ILogger<CategoryService> logger)
+        private readonly IConfiguration _configuration;
+        public CategoryService(ICategoriaRepository categoriaRepository,
+                               ILogger<CategoryService> logger,
+                               IConfiguration configuration)
         {
             _categoriaRepository = categoriaRepository;
             _logger = logger;
+            _configuration = configuration;
         }
         public async Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoriaAddDto)
         {
@@ -28,7 +33,8 @@ namespace BiblioSol.Application.Services.Library.Category
                 _logger.LogInformation("Adding new category with description: {Description}", categoriaAddDto.descripcion);
                 if (categoriaAddDto is null)
                 {
-                    operationResult = OperationResult.Failure("CategoriaAddDto cannot be null.");
+                    var errorMessage = _configuration["Error:ErrorCategoryIsNull"] ?? "Error: Category is null.";
+                    operationResult = OperationResult.Failure(errorMessage);
                     return operationResult;
                 }
 
@@ -37,6 +43,8 @@ namespace BiblioSol.Application.Services.Library.Category
                     operationResult = OperationResult.Failure($"Category with the description {categoriaAddDto.descripcion} already exists.");
                     return operationResult;
                 }
+
+                operationResult = await _categoriaRepository.AddAsync(categoriaAddDto.ToDomainEntityAdd());
 
             }
             catch (Exception ex)
@@ -53,10 +61,11 @@ namespace BiblioSol.Application.Services.Library.Category
             try
             { 
                 _logger.LogInformation("Retrieving all categories from the repository.");
-                var result = await _categoriaRepository.GetAllAsync(nt => nt.isActive);
+                var result = await _categoriaRepository.GetAllAsync(nt => nt.active);
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    var categories = result.Data.Cast<Categoria>().ToList();
+                    var categories = ((List<Categoria>)result.Data).ToList();
+
                     operationResult = OperationResult.Success("Categories retrieved successfully.", categories);
                 }
                 else
@@ -105,18 +114,14 @@ namespace BiblioSol.Application.Services.Library.Category
 
             try
             {
-                _logger.LogInformation("Adding new category with description: {Description}", categoriaUpdateDto.descripcion);
+                _logger.LogInformation("Updating new category with description: {Description}", categoriaUpdateDto.descripcion);
                 if (categoriaUpdateDto is null)
                 {
                     operationResult = OperationResult.Failure("CategoriaAddDto cannot be null.");
                     return operationResult;
                 }
 
-                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaUpdateDto.descripcion))
-                {
-                    operationResult = OperationResult.Failure($"Category with the description {categoriaUpdateDto.descripcion} already exists.");
-                    return operationResult;
-                }
+                operationResult = await _categoriaRepository.UpdateAsync(categoriaUpdateDto.ToDomainEntityUpdate());
 
             }
             catch (Exception ex)
@@ -132,33 +137,45 @@ namespace BiblioSol.Application.Services.Library.Category
             OperationResult operationResult = new OperationResult();
             try
             {
-                _logger.LogInformation("Deleting category with ID: {Id}", id);
-                var category = await _categoriaRepository.GetByIdAsync(id);
-                if (category.IsSuccess && category.Data is not null)
+                _logger.LogInformation("Disabling category with ID: {Id}", id);
+
+                var categoryResult = await _categoriaRepository.GetByIdAsync(id);
+                if (categoryResult.IsSuccess && categoryResult.Data is Categoria category)
                 {
-                    var result = await _categoriaRepository.DisableAsync(category.Data as Categoria);
-                    if (result.IsSuccess)
+                    if (!category.active)
                     {
-                        operationResult = OperationResult.Success("Category deleted successfully.");
+                        return OperationResult.Failure("The category is already disabled.");
+                    }
+
+                    category.active = false;
+                    var updateResult = await _categoriaRepository.UpdateAsync(category);
+
+                    if (updateResult.IsSuccess)
+                    {
+                        operationResult = OperationResult.Success("Category disabled successfully.", category);
                     }
                     else
                     {
-                        operationResult = OperationResult.Failure("Failed to delete the category.");
+                        operationResult = OperationResult.Failure("Failed to disable the category.");
                     }
                 }
                 else
                 {
                     operationResult = OperationResult.Failure($"Category with ID {id} not found.");
                 }
+                return operationResult;
+
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error deleting category: {ex.Message}", ex);
-                operationResult = OperationResult.Failure("An error occurred while deleting the category.");
+                _logger.LogError(ex, "Error disabling category with ID: {Id}", id);
+                operationResult = OperationResult.Failure("An error occurred while disabling the category.");
             }
+
             return operationResult;
         }
 
+
     }
-    
+
 }

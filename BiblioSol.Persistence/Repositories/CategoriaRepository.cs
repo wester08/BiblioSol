@@ -61,8 +61,8 @@ namespace BiblioSol.Persistence.Repositories
             }
 
             categoriaExistente.descripcion = entity.descripcion;
-            categoriaExistente.usuarioModificacionId = entity.usuarioModificacionId;
-            categoriaExistente.fechaModificacion = entity.fechaModificacion;
+            categoriaExistente.usuarioMod = entity.usuarioMod;
+            categoriaExistente.fechaMod = entity.fechaMod;
 
             return await base.UpdateAsync(categoriaExistente);
         }
@@ -86,9 +86,9 @@ namespace BiblioSol.Persistence.Repositories
                 return OperationResult.Failure("No se puede desactivar la categoría porque está asignada a libros.");
             }
 
-            categoria.isActive = isActive;
-            categoria.usuarioModificacionId = usuarioModifico;
-            categoria.fechaModificacion = fechaModificacion;
+            categoria.active = isActive;
+            categoria.usuarioMod = usuarioModifico;
+            categoria.fechaMod = fechaModificacion;
 
             return await base.DisableAsync(categoria); 
         }

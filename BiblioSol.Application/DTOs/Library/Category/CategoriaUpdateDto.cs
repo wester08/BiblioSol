@@ -9,7 +9,7 @@ namespace BiblioSol.Application.DTOs.Library.Category
         public DateTime? fechaModificacion { get; set; }
         public int? usuarioModificacionId { get; set; }
 
-        public bool isActive { get; set; }
+        public bool active { get; set; } = false;
 
     }
 }

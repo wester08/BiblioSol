@@ -13,7 +13,8 @@ namespace BiblioSol.Application.Extentions.Library.Category
             {
                 descripcion = dto.descripcion,
                 fechaCreacion = dto.fechaCreacion,
-                usuarioCreacionId = dto.usuarioCreacionId
+                usuarioCreacionId = dto.usuarioCreacionId,
+                active = dto.active
 
 
             };
@@ -26,11 +27,9 @@ namespace BiblioSol.Application.Extentions.Library.Category
             {
                 idCategoria = dto.idCategoria,
                 descripcion = dto.descripcion,
-                fechaModificacion = dto.fechaModificacion,
-                usuarioModificacionId = dto.usuarioModificacionId
-
-
-
+                fechaMod = dto.fechaModificacion,
+                usuarioMod = dto.usuarioModificacionId,
+                active = dto.active
 
             };
         }
@@ -41,8 +40,9 @@ namespace BiblioSol.Application.Extentions.Library.Category
             {
                 idCategoria = entity.idCategoria,
                 descripcion = entity.descripcion,
-                fechaModificacion = entity.fechaModificacion,
-                usuarioModificacionId = entity.usuarioModificacionId
+                fechaModificacion = entity.fechaMod,
+                usuarioModificacionId = entity.usuarioMod,
+                active = entity.active
 
             };
 

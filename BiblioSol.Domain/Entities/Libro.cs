@@ -1,9 +1,11 @@
-﻿using BiblioSol.Domain.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using BiblioSol.Domain.Base;
 
 namespace BiblioSol.Domain.Entities
 {
     public sealed class Libro : AuditEntity
     {
+        [Key]
         public int idLibro { get; set; }
         public string titulo { get; set; } = string.Empty;
         public string descripcion { get; set; } = string.Empty;

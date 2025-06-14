@@ -15,6 +15,5 @@ namespace BiblioSol.Application.Interfaces.Respositories
 
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter);
 
-        //Task<OperationResult> ExistsAsync (Expression<Func<bool>> filter);
     }
 }
