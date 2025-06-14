@@ -12,6 +12,9 @@ namespace BiblioSol.Application.Interfaces.Respositories
         Task<OperationResult> AddAsync(TEntity entity);
         Task<OperationResult> UpdateAsync(TEntity entity);
         Task<OperationResult> DisableAsync(TEntity entity);
-        Task<OperationResult> ExistsAsync (Expression<Func<TEntity, bool>> filter);
+
+        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter);
+
+        //Task<OperationResult> ExistsAsync (Expression<Func<bool>> filter);
     }
 }

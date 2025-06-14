@@ -113,7 +113,7 @@ namespace BiblioSol.Persistence.Base
             return Opresult;
 
         }
-        public virtual async Task<OperationResult> ExistsAsync(Expression<Func<TEntity, bool>> filter)
+        public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter)
         {
             OperationResult Opresult = new OperationResult();
 
@@ -134,8 +134,8 @@ namespace BiblioSol.Persistence.Base
                 Opresult = OperationResult.Failure($"Error checking existence of entity {typeof(TEntity)}: {ex.Message}");
 
             }
-            return Opresult;
-
+          
+            return await _dbSet.AnyAsync(filter);
         }
 
 

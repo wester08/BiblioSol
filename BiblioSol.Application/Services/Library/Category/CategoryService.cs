@@ -32,9 +32,9 @@ namespace BiblioSol.Application.Services.Library.Category
                     return operationResult;
                 }
 
-                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaAddDto.descripcion) !=null)
+                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaAddDto.descripcion))
                 {
-                    operationResult = OperationResult.Failure("Category already exists with the same description.");
+                    operationResult = OperationResult.Failure($"Category with the description {categoriaAddDto.descripcion} already exists.");
                     return operationResult;
                 }
 
@@ -46,30 +46,119 @@ namespace BiblioSol.Application.Services.Library.Category
             return operationResult;
         }
 
-        public Task<OperationResult> AddCategoriaAsync(Categoria categoria)
+        public async Task<OperationResult> GetAllCategoriaAsync()
         {
-            
-            throw new NotImplementedException();
+            OperationResult operationResult = new OperationResult();
+
+            try
+            { 
+                _logger.LogInformation("Retrieving all categories from the repository.");
+                var result = await _categoriaRepository.GetAllAsync(nt => nt.isActive);
+                if (result.IsSuccess && result.Data is not null)
+                {
+                    var categories = result.Data.Cast<Categoria>().ToList();
+                    operationResult = OperationResult.Success("Categories retrieved successfully.", categories);
+                }
+                else
+                {
+                    operationResult = OperationResult.Failure("No categories found.");
+                }
+                _logger.LogInformation("Successfully retrieved categories.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error retrieving all categories: {ex.Message}", ex);
+                operationResult = OperationResult.Failure("An error occurred while retrieving categories.");
+            }
+
+            return operationResult;
         }
 
-        public Task<OperationResult> DeleteCategoriaAsync(int id)
+        public async Task<OperationResult> GetCategoriaByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            OperationResult operationResult = new OperationResult();
+            try
+            {
+                _logger.LogInformation("Retrieving category with ID: {Id}", id);
+                var result = await _categoriaRepository.GetByIdAsync(id);
+                if (result.IsSuccess && result.Data is not null)
+                {
+                    var category = result.Data as Categoria;
+                    operationResult = OperationResult.Success("Category retrieved successfully.", category);
+                }
+                else
+                {
+                    operationResult = OperationResult.Failure($"Category with ID {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error retrieving category by ID: {ex.Message}", ex);
+                operationResult = OperationResult.Failure("An error occurred while retrieving the category.");
+            }
+            return operationResult;
         }
 
-        public Task<OperationResult> GetAllCategoriaAsync()
+        public async Task<OperationResult> UpdateCategoriaAsync(CategoriaUpdateDto categoriaUpdateDto)
         {
-            throw new NotImplementedException();
+            OperationResult operationResult = new OperationResult();
+
+            try
+            {
+                _logger.LogInformation("Adding new category with description: {Description}", categoriaUpdateDto.descripcion);
+                if (categoriaUpdateDto is null)
+                {
+                    operationResult = OperationResult.Failure("CategoriaAddDto cannot be null.");
+                    return operationResult;
+                }
+
+                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaUpdateDto.descripcion))
+                {
+                    operationResult = OperationResult.Failure($"Category with the description {categoriaUpdateDto.descripcion} already exists.");
+                    return operationResult;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding category: {ex.Message}", ex);
+            }
+            return operationResult;
         }
 
-        public Task<OperationResult> GetCategoriaByIdAsync(int id)
+
+        public async Task<OperationResult> DisableCategoriaAsync(int id)
         {
-            throw new NotImplementedException();
+            OperationResult operationResult = new OperationResult();
+            try
+            {
+                _logger.LogInformation("Deleting category with ID: {Id}", id);
+                var category = await _categoriaRepository.GetByIdAsync(id);
+                if (category.IsSuccess && category.Data is not null)
+                {
+                    var result = await _categoriaRepository.DisableAsync(category.Data as Categoria);
+                    if (result.IsSuccess)
+                    {
+                        operationResult = OperationResult.Success("Category deleted successfully.");
+                    }
+                    else
+                    {
+                        operationResult = OperationResult.Failure("Failed to delete the category.");
+                    }
+                }
+                else
+                {
+                    operationResult = OperationResult.Failure($"Category with ID {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting category: {ex.Message}", ex);
+                operationResult = OperationResult.Failure("An error occurred while deleting the category.");
+            }
+            return operationResult;
         }
 
-        public Task<OperationResult> UpdateCategoriaAsync(CategoriaUpdateDto categoriaUpdateDto)
-        {
-            throw new NotImplementedException();
-        }
     }
+    
 }
