@@ -1,7 +1,7 @@
 ﻿
 
 using BiblioSol.Application.Interfaces.Respositories;
-using BiblioSol.Domin.Base;
+using BiblioSol.Domain.Base;
 using BiblioSol.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -95,23 +95,6 @@ namespace BiblioSol.Persistence.Base
                 Opresult = OperationResult.Failure($"Error updating entity {typeof(TEntity)}: {ex.Message}");
             }
             return Opresult;
-        }
-        public virtual async Task<OperationResult> DisableAsync(TEntity entity)
-        {
-            OperationResult Opresult = new OperationResult();
-
-            try
-            {
-                _dbSet.Update(entity);
-                await _context.SaveChangesAsync();
-                Opresult = OperationResult.Success($"Entity {typeof(TEntity)} updated successfully", entity);
-            }
-            catch (Exception ex)
-            {
-                Opresult = OperationResult.Failure($"Error updating entity {typeof(TEntity)}: {ex.Message}");
-            }
-            return Opresult;
-
         }
         public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter)
         {

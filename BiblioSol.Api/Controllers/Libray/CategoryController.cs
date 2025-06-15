@@ -2,9 +2,7 @@
 using BiblioSol.Application.Interfaces.Services.Library;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace BiblioSol.Api.Controllers
+namespace BiblioSol.Api.Controllers.Libray
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -125,28 +123,5 @@ namespace BiblioSol.Api.Controllers
             }
         }
 
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("UpdateCategoriaById")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-
-                var result = await _categoriaService.DisableCategoriaAsync(id);
-                if (!result.IsSuccess)
-                {
-                    return BadRequest(result);
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new
-                {
-                    Message = "Ha ocurrido un error inesperado.",
-                    Details = ex.Message
-                });
-            }
-        }
     }
 }

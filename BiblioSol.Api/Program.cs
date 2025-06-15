@@ -1,7 +1,8 @@
 
 using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Application.Interfaces.Services.Library;
-using BiblioSol.Application.Services.Library.Category;
+using BiblioSol.Application.Services.Library;
+using BiblioSol.Persistence.Context;
 using BiblioSol.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,12 +16,16 @@ namespace BiblioSol.Api
 
             // Add services to the container.
 
-            builder.Services.AddDbContext<BiblioSol.Persistence.Context.BiblioContext>(options =>
+            builder.Services.AddDbContext<BiblioContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BiblioConn")));
 
             builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository >();
 
             builder.Services.AddTransient<ICategoriaService, CategoryService>();
+
+            builder.Services.AddScoped<IAutorRepository, AutorRepository>();
+
+            builder.Services.AddTransient<IAutorService, AutorService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,6 +1,5 @@
 ﻿using BiblioSol.Application.DTOs.Library.Category;
-using BiblioSol.Domain.Entities;
-using BiblioSol.Domin.Base;
+using BiblioSol.Domain.Base;
 
 namespace BiblioSol.Application.Interfaces.Services.Library
 {
@@ -10,7 +9,7 @@ namespace BiblioSol.Application.Interfaces.Services.Library
         Task<OperationResult> GetCategoriaByIdAsync(int id);
         Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoriaAdd);
         Task<OperationResult> UpdateCategoriaAsync(CategoriaUpdateDto categoriaUpdate);
-        Task<OperationResult> DisableCategoriaAsync(int id);
+
 
     }
 }

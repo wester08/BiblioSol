@@ -1,6 +1,6 @@
 ﻿
 
-using BiblioSol.Domin.Base;
+using BiblioSol.Domain.Base;
 using System.Linq.Expressions;
 
 namespace BiblioSol.Application.Interfaces.Respositories
@@ -11,7 +11,6 @@ namespace BiblioSol.Application.Interfaces.Respositories
         Task<OperationResult> GetByIdAsync(int id);
         Task<OperationResult> AddAsync(TEntity entity);
         Task<OperationResult> UpdateAsync(TEntity entity);
-        Task<OperationResult> DisableAsync(TEntity entity);
 
         Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> filter);
 

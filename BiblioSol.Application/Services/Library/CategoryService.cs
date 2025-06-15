@@ -1,15 +1,15 @@
 ﻿
 
 using BiblioSol.Application.DTOs.Library.Category;
-using BiblioSol.Application.Extentions.Library.Category;
 using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Application.Interfaces.Services.Library;
 using BiblioSol.Domain.Entities;
-using BiblioSol.Domin.Base;
+using BiblioSol.Domain.Base;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using BiblioSol.Application.Extentions.Library;
 
-namespace BiblioSol.Application.Services.Library.Category
+namespace BiblioSol.Application.Services.Library
 {
     public class CategoryService : ICategoriaService
     {
@@ -128,50 +128,6 @@ namespace BiblioSol.Application.Services.Library.Category
             {
                 _logger.LogError($"Error adding category: {ex.Message}", ex);
             }
-            return operationResult;
-        }
-
-
-        public async Task<OperationResult> DisableCategoriaAsync(int id)
-        {
-            OperationResult operationResult = new OperationResult();
-            try
-            {
-                _logger.LogInformation("Disabling category with ID: {Id}", id);
-
-                var categoryResult = await _categoriaRepository.GetByIdAsync(id);
-                if (categoryResult.IsSuccess && categoryResult.Data is Categoria category)
-                {
-                    if (!category.active)
-                    {
-                        return OperationResult.Failure("The category is already disabled.");
-                    }
-
-                    category.active = false;
-                    var updateResult = await _categoriaRepository.UpdateAsync(category);
-
-                    if (updateResult.IsSuccess)
-                    {
-                        operationResult = OperationResult.Success("Category disabled successfully.", category);
-                    }
-                    else
-                    {
-                        operationResult = OperationResult.Failure("Failed to disable the category.");
-                    }
-                }
-                else
-                {
-                    operationResult = OperationResult.Failure($"Category with ID {id} not found.");
-                }
-                return operationResult;
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error disabling category with ID: {Id}", id);
-                operationResult = OperationResult.Failure("An error occurred while disabling the category.");
-            }
-
             return operationResult;
         }
 

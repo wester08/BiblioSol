@@ -1,6 +1,6 @@
 ﻿using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Domain.Entities;
-using BiblioSol.Domin.Base;
+using BiblioSol.Domain.Base;
 using BiblioSol.Persistence.Base;
 using BiblioSol.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -54,53 +54,37 @@ namespace BiblioSol.Persistence.Repositories
                 return OperationResult.Failure("La descripción de la categoría no puede contener más de 50 caracteres.");
             }
 
-            var categoriaExistente = await _context.Categorias.FindAsync(entity.idCategoria);
-            if (categoriaExistente == null)
+            if (!entity.active)
             {
-                return OperationResult.Failure("Categoría no encontrada.");
+                bool asignadaALibroActivo = await _context.Libros
+                    .AnyAsync(l => l.categoriaId == entity.idCategoria && l.active);
+
+                if (asignadaALibroActivo)
+                {
+                    return OperationResult.Failure("No se puede desactivar la categoría porque está asignada a un libro activo.");
+                }
             }
 
-            categoriaExistente.descripcion = entity.descripcion;
-            categoriaExistente.usuarioMod = entity.usuarioMod;
-            categoriaExistente.fechaMod = entity.fechaMod;
 
-            return await base.UpdateAsync(categoriaExistente);
-        }
+            //if (await _context.Libros.AnyAsync(l => l.categoriaId == entity.idCategoria && l.active == true && entity.active == true))
+            //{
+            //    return OperationResult.Failure("No se puede cambiar el estado de la categoria porque está asignada a un libro activo.");
+            //}
 
-        public async Task<OperationResult> CambiarEstadoAsync(int idCategoria, bool isActive, int usuarioModifico, DateTime fechaModificacion)
-        {
-            if (idCategoria <= 0)
-            {
-                return OperationResult.Failure("El Id de la categoría debe ser mayor a cero.");
-            }
-
-            var categoria = await _context.Categorias.FindAsync(idCategoria);
+            var categoria = await _context.Categorias.FindAsync(entity.idCategoria);
             if (categoria == null)
             {
                 return OperationResult.Failure("Categoría no encontrada.");
             }
 
-            var tieneLibros = await _context.Libros.AnyAsync(l => l.categoriaId == idCategoria);
-            if (tieneLibros && !isActive)
-            {
-                return OperationResult.Failure("No se puede desactivar la categoría porque está asignada a libros.");
-            }
+            categoria.descripcion = entity.descripcion;
+            categoria.usuarioMod = entity.usuarioMod;
+            categoria.fechaMod = entity.fechaMod;
+            categoria.active = entity.active;
 
-            categoria.active = isActive;
-            categoria.usuarioMod = usuarioModifico;
-            categoria.fechaMod = fechaModificacion;
-
-            return await base.DisableAsync(categoria); 
+            return await base.UpdateAsync(categoria);
         }
 
-        public async Task<OperationResult> ObtenerPorIdAsync(int id)
-        {
-            return await base.GetByIdAsync(id);
-        }
 
-        public async Task<OperationResult> ObtenerTodosAsync()
-        {
-            return await base.GetAllAsync(_ => true); 
-        }
     }
 }

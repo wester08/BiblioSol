@@ -1,4 +1,4 @@
-﻿namespace BiblioSol.Domin.Base
+﻿namespace BiblioSol.Domain.Base
 {
     public class OperationResult
     {

@@ -1,8 +1,7 @@
-﻿
-using BiblioSol.Application.DTOs.Library.Category;
+﻿using BiblioSol.Application.DTOs.Library.Category;
 using BiblioSol.Domain.Entities;
 
-namespace BiblioSol.Application.Extentions.Library.Category
+namespace BiblioSol.Application.Extentions.Library
 {
     public static class CategoryExtension
     {

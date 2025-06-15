@@ -2,7 +2,7 @@
 
 namespace BiblioSol.Application.DTOs.Library.Category
 {
-    public class CategoriaUpdateDto
+    public record CategoriaUpdateDto
     {
         public int idCategoria { get; set; }
         public string descripcion { get; set; } = string.Empty;
