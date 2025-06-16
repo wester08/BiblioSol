@@ -12,5 +12,7 @@ namespace BiblioSol.Application.Interfaces.Services.Library
         Task<OperationResult> AddPrestamoAsync(PrestamoAddDto prestamoAddDto);
         Task<OperationResult> UpdatePrestamoAsync(PrestamoUpdateDto prestamoUpdateDto);
 
+        Task<OperationResult> SolicitarPrestamoAsync(PrestamoAddDto prestamoAddDto);
+
     }
 }

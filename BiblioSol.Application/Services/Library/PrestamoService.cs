@@ -1,6 +1,5 @@
 ﻿
 
-using BiblioSol.Application.DTOs.Library.Autor;
 using BiblioSol.Application.DTOs.Library.Prestamo;
 using BiblioSol.Application.Extentions.Library;
 using BiblioSol.Application.Interfaces.Respositories.Library;
@@ -25,6 +24,7 @@ namespace BiblioSol.Application.Services.Library
             _prestamoRepository = prestamoRepository;
             _Logger = logger;
             _configuration = configuration;
+
         }
 
 
@@ -128,6 +128,38 @@ namespace BiblioSol.Application.Services.Library
             {
                 _Logger.LogError($"Error updating loan: {ex.Message}", ex);
                 operationResult = OperationResult.Failure("An error occurred while updating the loan.");
+            }
+            return operationResult;
+        }
+
+        public async Task<OperationResult> SolicitarPrestamoAsync(PrestamoAddDto prestamoAddDto)
+        {
+            OperationResult operationResult = new OperationResult();
+
+            try
+            {
+                _Logger.LogInformation("Adding new request loan to the repository.");
+                if (prestamoAddDto is null)
+                {
+                    _Logger.LogError("PrestamoAddDto is null.");
+                    operationResult = OperationResult.Failure("Loan data cannot be null.");
+
+                }
+                //var reservadoPrestado = await _prestamoRepository.ExistsAsync(p => p.libroId == prestamoAddDto.libroId && p.estadoId == Estado.Reservado);
+
+                //if ()
+
+
+
+
+                operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAdd());
+
+                _Logger.LogInformation("Successfully added loan.");
+            }
+            catch (Exception ex)
+            {
+                _Logger.LogError($"Error adding new loan: {ex.Message}", ex);
+                operationResult = OperationResult.Failure("An error occurred while adding the loan.");
             }
             return operationResult;
         }

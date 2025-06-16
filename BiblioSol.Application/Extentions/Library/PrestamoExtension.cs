@@ -13,6 +13,7 @@ namespace BiblioSol.Application.Extentions.Library
             {
                 
                 libroId = dto.libroId,
+                nombreCliente = dto.nombreCliente,
                 fechaCompromiso = dto.fechaCompromiso,
                 estadoId = dto.estadoId,
                 fechaCreacion = dto.fechaCreacion,
@@ -25,6 +26,7 @@ namespace BiblioSol.Application.Extentions.Library
             return new Prestamo
             {
                 idPrestamo = dto.idPrestamo,
+                nombreCliente = dto.nombreCliente,
                 libroId = dto.libroId,
                 fechaCompromiso = dto.fechaCompromiso,
                 fechaDevolucion = dto.fechaDevolucion,
@@ -42,6 +44,7 @@ namespace BiblioSol.Application.Extentions.Library
             return new PrestamoUpdateDto
             {
                 idPrestamo = entity.idPrestamo,
+                nombreCliente = entity.nombreCliente,
                 libroId = entity.libroId,
                 fechaCompromiso = entity.fechaCompromiso,
                 fechaDevolucion = entity.fechaDevolucion,

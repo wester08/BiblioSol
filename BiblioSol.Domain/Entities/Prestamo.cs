@@ -9,6 +9,8 @@ namespace BiblioSol.Domain.Entities
     {
         [Key]
         public int idPrestamo { get; set; }
+
+        public string nombreCliente { get; set; }
         public int libroId { get; set; }
         public DateOnly fechaCompromiso { get; set; }
         public DateOnly? fechaDevolucion { get; set; }

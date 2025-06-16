@@ -4,6 +4,7 @@ namespace BiblioSol.Application.DTOs.Library.Prestamo
     public record PrestamoUpdateDto
     {
         public int idPrestamo { get; set; }
+        public string nombreCliente { get; set; }
         public int libroId { get; set; }
         public DateOnly fechaCompromiso { get; set; }
         public DateOnly? fechaDevolucion { get; set; }
