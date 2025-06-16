@@ -24,42 +24,13 @@ namespace BiblioSol.Application.Services.Library
             _logger = logger;
             _configuration = configuration;
         }
-        public async Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoriaAddDto)
-        {
-            OperationResult operationResult = new OperationResult();
-
-            try
-            {
-                _logger.LogInformation("Adding new category with description: {Description}", categoriaAddDto.descripcion);
-                if (categoriaAddDto is null)
-                {
-                    var errorMessage = _configuration["Error:ErrorCategoryIsNull"] ?? "Error: Category is null.";
-                    operationResult = OperationResult.Failure(errorMessage);
-                    return operationResult;
-                }
-
-                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaAddDto.descripcion))
-                {
-                    operationResult = OperationResult.Failure($"Category with the description {categoriaAddDto.descripcion} already exists.");
-                    return operationResult;
-                }
-
-                operationResult = await _categoriaRepository.AddAsync(categoriaAddDto.ToDomainEntityAdd());
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error adding category: {ex.Message}", ex);
-            }
-            return operationResult;
-        }
 
         public async Task<OperationResult> GetAllCategoriaAsync()
         {
             OperationResult operationResult = new OperationResult();
 
             try
-            { 
+            {
                 _logger.LogInformation("Retrieving all categories from the repository.");
                 var result = await _categoriaRepository.GetAllAsync(nt => nt.active);
                 if (result.IsSuccess && result.Data is not null)
@@ -104,6 +75,36 @@ namespace BiblioSol.Application.Services.Library
             {
                 _logger.LogError($"Error retrieving category by ID: {ex.Message}", ex);
                 operationResult = OperationResult.Failure("An error occurred while retrieving the category.");
+            }
+            return operationResult;
+        }
+
+        public async Task<OperationResult> AddCategoriaAsync(CategoriaAddDto categoriaAddDto)
+        {
+            OperationResult operationResult = new OperationResult();
+
+            try
+            {
+                _logger.LogInformation("Adding new category with description: {Description}", categoriaAddDto.descripcion);
+                if (categoriaAddDto is null)
+                {
+                    var errorMessage = _configuration["Error:ErrorCategoryIsNull"] ?? "Error: Category is null.";
+                    operationResult = OperationResult.Failure(errorMessage);
+                    return operationResult;
+                }
+
+                if (await _categoriaRepository.ExistsAsync(nt => nt.descripcion == categoriaAddDto.descripcion))
+                {
+                    operationResult = OperationResult.Failure($"Category with the description {categoriaAddDto.descripcion} already exists.");
+                    return operationResult;
+                }
+
+                operationResult = await _categoriaRepository.AddAsync(categoriaAddDto.ToDomainEntityAdd());
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding category: {ex.Message}", ex);
             }
             return operationResult;
         }

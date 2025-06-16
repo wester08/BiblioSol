@@ -27,6 +27,14 @@ namespace BiblioSol.Api
 
             builder.Services.AddTransient<IAutorService, AutorService>();
 
+            builder.Services.AddScoped<IEditorialRepository, EditorialRepository>();   
+
+            builder.Services.AddTransient<IEditorialSevice, EditorialService>();
+
+            builder.Services.AddScoped<ILibroRepository, LibroRepository>();
+
+            builder.Services.AddTransient<ILibroService, LibroService>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

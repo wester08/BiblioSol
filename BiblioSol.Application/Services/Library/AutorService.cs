@@ -92,12 +92,12 @@ namespace BiblioSol.Application.Services.Library
                 {
                     var errorMessage = _configuration["Error:ErrorAuthorIsNull"] ?? "Error: Author is null.";
                     operationResult = OperationResult.Failure(errorMessage);
-                    return operationResult;
+                    
                 }
                 if (await _autorRepository.ExistsAsync(nt => nt.nombre == autorAddDto.nombre))
                 {
                     operationResult = OperationResult.Failure($"Author with the name {autorAddDto.nombre} already exists.");
-                    return operationResult;
+                 
                 }
                 operationResult = await _autorRepository.AddAsync(autorAddDto.ToDomainEntityAdd());
             }
