@@ -94,11 +94,6 @@ namespace BiblioSol.Application.Services.Library
                     operationResult = OperationResult.Failure(errorMessage);
                     
                 }
-                if (await _autorRepository.ExistsAsync(nt => nt.nombre == autorAddDto.nombre))
-                {
-                    operationResult = OperationResult.Failure($"Author with the name {autorAddDto.nombre} already exists.");
-                 
-                }
                 operationResult = await _autorRepository.AddAsync(autorAddDto.ToDomainEntityAdd());
             }
             catch (Exception ex)

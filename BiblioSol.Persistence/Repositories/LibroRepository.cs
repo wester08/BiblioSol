@@ -205,7 +205,6 @@ namespace BiblioSol.Persistence.Repositories
                 return OperationResult.Failure("El usuario que modifica el libro debe ser especificado.");
             }
 
-            // Validación de ISBN duplicado (si se cambió)
             if (!string.Equals(entity.isbn, libroExistente.Data.isbn, StringComparison.OrdinalIgnoreCase))
             {
                 var isbnDuplicado = await ExistsAsync(l => l.isbn == entity.isbn && l.idLibro != entity.idLibro && l.active);
@@ -215,7 +214,6 @@ namespace BiblioSol.Persistence.Repositories
                 }
             }
 
-            // Validación especial para desactivar
             if (!entity.active)
             {
                 bool libroPrestado = await _context.Prestamos
