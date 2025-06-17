@@ -22,6 +22,7 @@ namespace BiblioSol.Persistence.Context
         public DbSet<Autor> Autores { get; set; }
         public DbSet<Editorial> Editoriales { get; set; }
         public DbSet<Prestamo> Prestamos { get; set; }
+        public DbSet<Estado> Estados { get; set; }
         //public DbSet<Autor> Autor { get; set; }
         //public DbSet<Notificacion> Notificacion { get; set; }
         //public DbSet<Usuario> Usuario { get; set; }
