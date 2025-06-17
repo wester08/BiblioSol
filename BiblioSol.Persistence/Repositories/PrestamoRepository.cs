@@ -39,7 +39,13 @@ namespace BiblioSol.Persistence.Repositories
             }
 
 
-            var libroExists = await _context.Libros.AnyAsync(l => l.idLibro == entity.libroId && l.active == true);
+            bool libroExists = await _context.Libros.AnyAsync(l => l.idLibro == entity.libroId
+                                                               && (l.estadoId == 2
+                                                               || l.estadoId == 3)
+                                                               && l.active == true);
+                
+            
+
             if (libroExists)
             {
                 return OperationResult.Failure($"El libro con ID {entity.libroId} se encuentra asignado a otro prestamo.");
@@ -52,10 +58,6 @@ namespace BiblioSol.Persistence.Repositories
 
         public override async Task<OperationResult> UpdateAsync(Prestamo entity)
         {
-            if (entity.fechaMod == default)
-            {
-                return OperationResult.Failure("La fecha de préstamo debe ser completada.");
-            }
 
             if (entity.libroId <= 0)
             {

@@ -145,14 +145,8 @@ namespace BiblioSol.Application.Services.Library
                     operationResult = OperationResult.Failure("Loan data cannot be null.");
 
                 }
-                //var reservadoPrestado = await _prestamoRepository.ExistsAsync(p => p.libroId == prestamoAddDto.libroId && p.estadoId == Estado.Reservado);
+                operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAddReservar());
 
-                //if ()
-
-
-
-
-                operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAdd());
 
                 _Logger.LogInformation("Successfully added loan.");
             }

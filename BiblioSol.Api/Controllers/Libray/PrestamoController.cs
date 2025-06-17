@@ -1,4 +1,5 @@
-﻿using BiblioSol.Application.DTOs.Library.Prestamo;
+﻿using BiblioSol.Application.DTOs.Library.Libro;
+using BiblioSol.Application.DTOs.Library.Prestamo;
 using BiblioSol.Application.Interfaces.Services.Library;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -93,7 +94,13 @@ namespace BiblioSol.Api.Controllers.Libray
         {
             try
             {
-                prestamoUpdateDto.idPrestamo = id; 
+                if (id != prestamoUpdateDto.idPrestamo)
+                {
+                    return BadRequest(new
+                    {
+                        Message = "El ID del prestamo en la URL no coincide con el ID en el cuerpo de la solicitud."
+                    });
+                }
                 var result = await _prestamoService.UpdatePrestamoAsync(prestamoUpdateDto);
                 if (!result.IsSuccess)
                 {

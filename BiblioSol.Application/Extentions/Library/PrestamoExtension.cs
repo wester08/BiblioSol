@@ -21,6 +21,21 @@ namespace BiblioSol.Application.Extentions.Library
                 active = dto.active
             };
         }
+
+        public static Prestamo ToDomainEntityAddReservar(this PrestamoAddDto dto)
+        {
+            return new Prestamo
+            {
+
+                libroId = dto.libroId,
+                nombreCliente = dto.nombreCliente,
+                fechaCompromiso = dto.fechaCompromiso,
+                estadoId = 2,
+                fechaCreacion = dto.fechaCreacion,
+                usuarioCreacionId = dto.usuarioCreacionId,
+                active = dto.active
+            };
+        }
         public static Prestamo ToDomainEntityUpdate(this PrestamoUpdateDto dto)
         {
             return new Prestamo
@@ -57,5 +72,7 @@ namespace BiblioSol.Application.Extentions.Library
                 active = entity.active
             };
         }
+
+
     }
 }
