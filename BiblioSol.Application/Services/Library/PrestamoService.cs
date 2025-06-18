@@ -108,7 +108,7 @@ namespace BiblioSol.Application.Services.Library
                         var libroEntity = (Libro)libro.Data;
                         libroEntity.estadoId = 4;// Cambiar el estado a "PRESTADO"
                         libroEntity.fechaMod = DateTime.Now;
-                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId; // Asignar el usuario que realiza la modificación
+                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId; 
 
                         await _libroRepository.UpdateAsync(libroEntity);
                     }
@@ -173,19 +173,15 @@ namespace BiblioSol.Application.Services.Library
                 }
                 operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAddReservar());
 
-                // Cambiar el estado del libro en la entidad Libros
-                // Aquí se asume que el libro ya está reservado y se cambia su estado a "Prestado"
-                // Esto puede requerir una llamada a otro repositorio o servicio para actualizar el estado del libro
-                // Ejemplo:
                 try
                 {
                     var libro = await _libroRepository.GetByIdAsync(prestamoAddDto.libroId);
                     if (libro.IsSuccess && libro.Data is not null)
                     {
                         var libroEntity = (Libro)libro.Data;
-                        libroEntity.estadoId = 3;// Cambiar el estado a "PRESTADO"
+                        libroEntity.estadoId = 3;// Cambiar el estado a "Reservado"
                         libroEntity.fechaMod = DateTime.Now;
-                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId; // Asignar el usuario que realiza la modificación
+                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId;
 
                         await _libroRepository.UpdateAsync(libroEntity);
                     }
