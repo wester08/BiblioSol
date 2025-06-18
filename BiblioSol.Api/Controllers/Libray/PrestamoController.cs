@@ -2,7 +2,6 @@
 using BiblioSol.Application.DTOs.Library.Prestamo;
 using BiblioSol.Application.Interfaces.Services.Library;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -118,6 +117,30 @@ namespace BiblioSol.Api.Controllers.Libray
             }
 
         }
+
+        // POST api/<PrestamoController>
+        [HttpPost("SolicitarPrestamo")]
+        public async Task<IActionResult> SolicitarPrestamo([FromBody] PrestamoAddDto prestamoAddDto)
+        {
+            try
+            {
+                var result = await _prestamoService.SolicitarPrestamoAsync(prestamoAddDto);
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(result);
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    Message = "Ha ocurrido un error inesperado.",
+                    Details = ex.Message
+                });
+            }
+        }
+
 
     }
 }

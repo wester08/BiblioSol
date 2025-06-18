@@ -8,8 +8,8 @@ namespace BiblioSol.Application.DTOs.Library.Estado
 
         public string nombre { get; set; }
 
-        public DateTime? fechaMod { get; set; }
-        public int? usuarioMod { get; set; }
+        public DateTime? fechaModificacion { get; set; }
+        public int? usuarioModificionId { get; set; }
 
         public bool active { get; set; }
     }

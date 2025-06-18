@@ -105,10 +105,11 @@ namespace BiblioSol.Application.Services.Library
             OperationResult operationResult = new OperationResult();
             try
             {
-                _Logger.LogInformation($"Updating state with ID {estadoUpdateDto.id} in the repository.");
+                _Logger.LogInformation($"Updating state with ID {estadoUpdateDto.idEstado} in the repository.");
                 if (estadoUpdateDto == null)
                 {
-                    return OperationResult.Failure("EstadoUpdateDto is null");
+                    operationResult = OperationResult.Failure("EstadoUpdateDto is null");
+                    return operationResult;
                 }
 
 

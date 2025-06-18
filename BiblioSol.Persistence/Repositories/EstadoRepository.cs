@@ -5,6 +5,7 @@ using BiblioSol.Domain.Base;
 using BiblioSol.Domain.Entities;
 using BiblioSol.Persistence.Base;
 using BiblioSol.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace BiblioSol.Persistence.Repositories
 {
@@ -44,7 +45,21 @@ namespace BiblioSol.Persistence.Repositories
             {
                 return OperationResult.Failure("El nombre del estado no puede contener más de 50 caracteres.");
             }
-            return await base.UpdateAsync(entity);
+
+            var estado = await _context.Estados.FindAsync(entity.idEstado);
+            if (estado == null)
+            {
+                return OperationResult.Failure($"El estado no existe.");
+            }
+            estado.nombre = entity.nombre;
+            estado.fechaMod = entity.fechaMod;
+            estado.usuarioMod = entity.usuarioMod;
+            estado.active = entity.active;
+
+
+
+
+            return await base.UpdateAsync(estado);
         }
 
     }

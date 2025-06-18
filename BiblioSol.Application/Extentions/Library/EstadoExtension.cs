@@ -23,8 +23,8 @@ namespace BiblioSol.Application.Extentions.Library
             {
                 idEstado = dto.idEstado,
                 nombre = dto.nombre,
-                fechaMod = dto.fechaMod,
-                usuarioMod = dto.usuarioMod,
+                fechaMod = dto.fechaModificacion,
+                usuarioMod = dto.usuarioModificionId,
                 active = dto.active
             };
         }
@@ -34,8 +34,8 @@ namespace BiblioSol.Application.Extentions.Library
             {
                 idEstado = entity.idEstado,
                 nombre = entity.nombre,
-                fechaMod = entity.fechaMod,
-                usuarioMod = entity.usuarioMod,
+                fechaModificacion = entity.fechaMod,
+                usuarioModificionId = entity.usuarioMod,
                 active = entity.active
             };
         }

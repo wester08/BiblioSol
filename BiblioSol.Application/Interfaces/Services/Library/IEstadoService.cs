@@ -12,5 +12,6 @@ namespace BiblioSol.Application.Interfaces.Services.Library
         Task<OperationResult> AddEstadoAsync(EstadoAddDto estadoAddDto);
         Task<OperationResult> UpdateEstadoAsync(EstadoUpdateDto estadoUpdateDto);
 
+
     }
 }

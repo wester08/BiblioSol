@@ -16,15 +16,17 @@ namespace BiblioSol.Application.Services.Library
         private readonly IPrestamoRepository _prestamoRepository;
         private readonly ILogger _Logger;
         private readonly IConfiguration _configuration;
+        private readonly ILibroRepository _libroRepository;
 
         public PrestamoService(IPrestamoRepository prestamoRepository,
                                ILogger<PrestamoService> logger,
-                               IConfiguration configuration)
+                               IConfiguration configuration,
+                               ILibroRepository libroRepository)
         {
             _prestamoRepository = prestamoRepository;
             _Logger = logger;
             _configuration = configuration;
-
+            _libroRepository = libroRepository;
         }
 
 
@@ -118,6 +120,7 @@ namespace BiblioSol.Application.Services.Library
                 {
                     _Logger.LogError("PrestamoUpdateDto is null.");
                     operationResult = OperationResult.Failure("Loan data cannot be null.");
+
                 }
                 
                     operationResult = await _prestamoRepository.UpdateAsync(prestamoUpdateDto.ToDomainEntityUpdate());
@@ -147,8 +150,26 @@ namespace BiblioSol.Application.Services.Library
                 }
                 operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAddReservar());
 
+                // Cambiar el estado del libro en la entidad Libros
+                // Aquí se asume que el libro ya está reservado y se cambia su estado a "Prestado"
+                // Esto puede requerir una llamada a otro repositorio o servicio para actualizar el estado del libro
+                // Ejemplo:
+                var libro = await _libroRepository.GetByIdAsync(prestamoAddDto.libroId);
+                if (libro.IsSuccess && libro.Data is not null)
+                {
+                    var libroEntity = (Libro)libro.Data;
+                    libroEntity.estadoId = 3; // Cambiar el estado a "Prestado"
+                    await _libroRepository.UpdateAsync(libroEntity);
+                }
+                else
+                {
+                    _Logger.LogWarning($"No se encontró el libro con ID {prestamoAddDto.libroId} para actualizar su estado.");
+                }
 
-                _Logger.LogInformation("Successfully added loan.");
+
+
+
+                    _Logger.LogInformation("Successfully added loan.");
             }
             catch (Exception ex)
             {

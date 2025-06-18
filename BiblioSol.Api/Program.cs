@@ -39,6 +39,10 @@ namespace BiblioSol.Api
 
             builder.Services.AddTransient<IPrestamoService, PrestamoService>();
 
+            builder.Services.AddScoped<IEstadoRepository, EstadoRepository>();
+
+            builder.Services.AddTransient<IEstadoService, EstadoService>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

@@ -67,7 +67,31 @@ namespace BiblioSol.Persistence.Repositories
             {
                 return OperationResult.Failure("El usuario que modifico el préstamo debe ser completado.");
             }
-            return await base.UpdateAsync(entity);
+
+            var prestamo = await _context.Prestamos.FindAsync(entity.idPrestamo);
+
+            if (prestamo == null)
+            {
+                return OperationResult.Failure($"El préstamo con ID {entity.idPrestamo} no existe.");
+            }
+
+            prestamo.libroId = entity.libroId;
+            prestamo.nombreCliente = entity.nombreCliente;
+            prestamo.libroId = entity.libroId;
+            prestamo.fechaCompromiso = entity.fechaCompromiso;
+            prestamo.fechaDevolucion = entity.fechaDevolucion;
+            prestamo.diasRetraso = entity.diasRetraso;
+            prestamo.monto = entity.monto;
+            prestamo.penalizado = entity.penalizado;
+            prestamo.estadoId = entity.estadoId;
+            prestamo.fechaMod = entity.fechaMod;
+            prestamo.usuarioMod = entity.usuarioMod;
+            prestamo.active = entity.active;
+
+
+
+
+            return await base.UpdateAsync(prestamo);
         }
     }
 
