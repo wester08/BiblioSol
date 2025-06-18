@@ -100,6 +100,29 @@ namespace BiblioSol.Application.Services.Library
                 }
                 operationResult = await _prestamoRepository.AddAsync(prestamoAddDto.ToDomainEntityAdd());
 
+                try
+                {
+                    var libro = await _libroRepository.GetByIdAsync(prestamoAddDto.libroId);
+                    if (libro.IsSuccess && libro.Data is not null)
+                    {
+                        var libroEntity = (Libro)libro.Data;
+                        libroEntity.estadoId = 4;// Cambiar el estado a "PRESTADO"
+                        libroEntity.fechaMod = DateTime.Now;
+                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId; // Asignar el usuario que realiza la modificación
+
+                        await _libroRepository.UpdateAsync(libroEntity);
+                    }
+                    else
+                    {
+                        _Logger.LogWarning($"No se encontró el libro con ID {prestamoAddDto.libroId} para actualizar su estado.");
+                    }
+
+                } catch (Exception ex) {
+                    _Logger.LogError($"Error updating book status: {ex.Message}", ex);
+                    operationResult = OperationResult.Failure("An error occurred while updating the book status.");
+                }
+
+
                 _Logger.LogInformation("Successfully added loan.");
             }
             catch (Exception ex)
@@ -154,22 +177,33 @@ namespace BiblioSol.Application.Services.Library
                 // Aquí se asume que el libro ya está reservado y se cambia su estado a "Prestado"
                 // Esto puede requerir una llamada a otro repositorio o servicio para actualizar el estado del libro
                 // Ejemplo:
-                var libro = await _libroRepository.GetByIdAsync(prestamoAddDto.libroId);
-                if (libro.IsSuccess && libro.Data is not null)
+                try
                 {
-                    var libroEntity = (Libro)libro.Data;
-                    libroEntity.estadoId = 3; // Cambiar el estado a "Prestado"
-                    await _libroRepository.UpdateAsync(libroEntity);
+                    var libro = await _libroRepository.GetByIdAsync(prestamoAddDto.libroId);
+                    if (libro.IsSuccess && libro.Data is not null)
+                    {
+                        var libroEntity = (Libro)libro.Data;
+                        libroEntity.estadoId = 3;// Cambiar el estado a "PRESTADO"
+                        libroEntity.fechaMod = DateTime.Now;
+                        libroEntity.usuarioMod = prestamoAddDto.usuarioCreacionId; // Asignar el usuario que realiza la modificación
+
+                        await _libroRepository.UpdateAsync(libroEntity);
+                    }
+                    else
+                    {
+                        _Logger.LogWarning($"No se encontró el libro con ID {prestamoAddDto.libroId} para actualizar su estado.");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    _Logger.LogWarning($"No se encontró el libro con ID {prestamoAddDto.libroId} para actualizar su estado.");
+                    _Logger.LogError($"Error updating book status: {ex.Message}", ex);
+                    operationResult = OperationResult.Failure("An error occurred while updating the book status.");
+
                 }
 
 
 
-
-                    _Logger.LogInformation("Successfully added loan.");
+                _Logger.LogInformation("Successfully added loan.");
             }
             catch (Exception ex)
             {

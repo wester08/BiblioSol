@@ -15,7 +15,7 @@ namespace BiblioSol.Application.Extentions.Library
                 libroId = dto.libroId,
                 nombreCliente = dto.nombreCliente,
                 fechaCompromiso = dto.fechaCompromiso,
-                estadoId = dto.estadoId,
+                estadoId = 1,
                 fechaCreacion = dto.fechaCreacion,
                 usuarioCreacionId = dto.usuarioCreacionId,
                 active = dto.active
