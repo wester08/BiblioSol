@@ -1,8 +1,8 @@
-using BiblioSol.web.Models;
-using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BiblioSol.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BiblioSol.web.Controllers
+namespace BiblioSol.Web.Controllers
 {
     public class HomeController : Controller
     {

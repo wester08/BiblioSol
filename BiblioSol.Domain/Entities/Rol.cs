@@ -49,5 +49,4 @@ public class Rol
     /// </summary>
     public bool Active { get; set; }
 
-    public virtual ICollection<UsuariosRole> UsuariosRoles { get; set; } = new List<UsuariosRole>();
 }

@@ -40,15 +40,15 @@ namespace BiblioSol.Persistence.Repositories
 
 
             bool libroExists = await _context.Libros.AnyAsync(l => l.idLibro == entity.libroId
-                                                               && (l.estadoId == 2
-                                                               || l.estadoId == 3)
+                                                               && (l.estadoId == 3
+                                                               || l.estadoId == 4)
                                                                && l.active == true);
                 
             
 
             if (libroExists)
             {
-                return OperationResult.Failure($"El libro con ID {entity.libroId} se encuentra asignado a otro prestamo.");
+                return OperationResult.Failure($"El libro con ID {entity.libroId} se encuentra asignado o reservado a otro prestamo.");
 
             }
 

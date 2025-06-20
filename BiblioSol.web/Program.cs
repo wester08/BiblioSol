@@ -1,4 +1,4 @@
-namespace BiblioSol.web
+namespace BiblioSol.Web
 {
     public class Program
     {

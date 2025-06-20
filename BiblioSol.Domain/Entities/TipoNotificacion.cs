@@ -50,5 +50,4 @@ public class TipoNotificacion
     /// </summary>
     public bool Active { get; set; }
 
-    public virtual ICollection<Notificacione> Notificaciones { get; set; } = new List<Notificacione>();
 }

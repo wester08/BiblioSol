@@ -1,4 +1,4 @@
-namespace BiblioSol.web.Models
+namespace BiblioSol.Web.Models
 {
     public class ErrorViewModel
     {

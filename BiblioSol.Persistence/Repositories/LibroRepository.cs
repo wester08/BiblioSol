@@ -224,7 +224,30 @@ namespace BiblioSol.Persistence.Repositories
                 }
             }
 
-            return await base.UpdateAsync(entity);
+            var libro = await _context.Libros.FindAsync(entity.idLibro);
+
+            if (libro == null)
+            {
+                return OperationResult.Failure("El libro no se encuentra registrado en la base de datos.");
+            }
+            libro.idLibro = entity.idLibro;
+            libro.titulo = entity.titulo;
+            libro.descripcion = entity.descripcion;
+            libro.numeroPaginas = entity.numeroPaginas;
+            libro.isbn = entity.isbn;
+            libro.autorId = entity.autorId;
+            libro.editorialId = entity.editorialId;
+            libro.anioPublicacion = entity.anioPublicacion;
+            libro.categoriaId = entity.categoriaId;
+            libro.precio = entity.precio;
+            libro.stock = entity.stock;
+            libro.estadoId = entity.estadoId;
+            libro.idioma = entity.idioma;
+            libro.usuarioMod = entity.usuarioMod;
+            libro.fechaMod = DateTime.Now;
+            libro.active = entity.active;
+
+            return await base.UpdateAsync(libro);
         }
 
     }
