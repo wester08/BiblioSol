@@ -1,0 +1,17 @@
+﻿
+<h1>Search loan by Id</h1>
+
+
+<form asp-action="GetPrestamoById" method="get">
+    <div class="form-group">
+        <label for="id">loans ID:</label>
+        <input type="number" class="form-control" name="id" id="id" required />
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+</form>
+
+<hr />
+
+<div>
+    <a asp-action="GetAllPrestamos">Back to List</a>
+</div>

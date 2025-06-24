@@ -2,7 +2,7 @@
 
 namespace BiblioSol.Shared.Dtos
 {
-    public class AddCategoryDto
+    public record AddCategoryDto
     {
         public string descripcion { get; set; } = string.Empty;
         public DateTime fechaCreacion { get; set; }

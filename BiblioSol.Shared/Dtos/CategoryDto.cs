@@ -2,7 +2,7 @@
 
 namespace BiblioSol.Shared.Dtos
 {
-    public class CategoryDto
+    public record CategoryDto
     {
         public int idCategoria { get; set; }
         public string descripcion { get; set; } = string.Empty;
