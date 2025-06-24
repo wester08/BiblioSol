@@ -44,6 +44,25 @@ namespace BiblioSol.Application.Extentions.Library
             };
         }
 
+        public static AutorDto ToADto(this Autor entity)
+        {
+            return new AutorDto
+            {
+                idAutor = entity.idAutor,
+                nombre = entity.nombre,
+                apellido = entity.apellido,
+                fechaCreacion = entity.fechaCreacion ,
+                usuarioCreacionId = entity.usuarioCreacionId,
+                fechaMod = entity.fechaMod,
+                usuarioMod = entity.usuarioMod,
+                active = entity.active
+            };
+        }
+
+        public static List<AutorDto> ToDAtoList(this IEnumerable<Autor> entities)
+        {
+            return entities.Select(e => e.ToADto()).ToList();
+        }
 
 
     }

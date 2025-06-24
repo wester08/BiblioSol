@@ -38,7 +38,7 @@ namespace BiblioSol.Application.Services.Library
                 var result = await _autorRepository.GetAllAsync(nt => nt.active);
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    var authors = ((List<Autor>)result.Data).ToList();
+                    var authors = ((List<Autor>)result.Data).ToDAtoList();
                     operationResult = OperationResult.Success("Authors retrieved successfully.", authors);
                 }
                 else
@@ -66,7 +66,7 @@ namespace BiblioSol.Application.Services.Library
                 var result = await _autorRepository.GetByIdAsync(id);
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    var author = result.Data as Autor;
+                    var author = result.Data.ToDAto as Autor;
                     operationResult = OperationResult.Success("Author retrieved successfully.", author);
                 }
                 else
