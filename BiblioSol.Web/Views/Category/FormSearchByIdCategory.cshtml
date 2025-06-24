@@ -1,0 +1,20 @@
+﻿
+
+
+
+<h1>Search category by Id</h1>
+
+
+<form asp-action="GetCategoriaById" method="get">
+    <div class="form-group">
+        <label for="id">Category ID:</label>
+        <input type="number" class="form-control" name="id" id="id" required />
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+</form>
+
+<hr />
+
+<div>
+    <a asp-action="GetAllCategoria">Back to List</a>
+</div>

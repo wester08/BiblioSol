@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BiblioSol.Shared.Dtos.CategoryDto>
+
+@{
+    ViewData["Title"] = "GetAllCategoria";
+}
+
+<h1>Category List</h1>
+
+<p>
+    <a asp-action="AddCategoria">Create New</a>
+</p>
+<p>
+    <a asp-action="FormSearchByIdCategory">Search by Id</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioCreacionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idCategoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioCreacionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.active)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "UpdateCategoriaById", new { id = item.idCategoria })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

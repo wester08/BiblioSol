@@ -1,0 +1,52 @@
+﻿@model BiblioSol.Shared.Dtos.UpdateCategoryDto
+
+@{
+    ViewData["Title"] = "UpdateCategoriaById";
+}
+
+<h1>Update Category</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateCategoriaById">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="idCategoria" class="control-label"></label>
+                <input asp-for="idCategoria" class="form-control" />
+                <span asp-validation-for="idCategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="fechaModificacion" class="control-label"></label>
+                <input asp-for="fechaModificacion" class="form-control" />
+                <span asp-validation-for="fechaModificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usuarioModificacionId" class="control-label"></label>
+                <input asp-for="usuarioModificacionId" class="form-control" />
+                <span asp-validation-for="usuarioModificacionId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllCategoria">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
