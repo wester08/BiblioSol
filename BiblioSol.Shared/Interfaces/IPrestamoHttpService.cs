@@ -9,6 +9,8 @@ namespace BiblioSol.Shared.Interfaces
         Task<OperationResult<IEnumerable<PrestamoDto>>> GetAllAsync();
         Task<OperationResult<PrestamoDto>> GetByIdAsync(int id);
         Task<OperationResult<PrestamoAddDto>> AddAsync(PrestamoAddDto dto);
+        Task<OperationResult<PrestamoAddDto>> AddSolicitudAsync(PrestamoAddDto dto);
         Task<OperationResult<object>> UpdateAsync(int id, PrestamoUpdateDto dto);
+
     }
 }

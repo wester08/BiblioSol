@@ -23,6 +23,16 @@ namespace BiblioSol.Web
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5));
             builder.Services.AddControllersWithViews();
 
+            builder.Services.Configure<ApiConfig>(builder.Configuration.GetSection("ApiConfig"));
+            builder.Services.AddHttpClient<ILibroHttpService, LibroHttpService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.Configure<ApiConfig>(builder.Configuration.GetSection("ApiConfig"));
+            builder.Services.AddHttpClient<IEstadoHttpService, EstadoHttpService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+            builder.Services.AddControllersWithViews();
+
 
             var app = builder.Build();
 

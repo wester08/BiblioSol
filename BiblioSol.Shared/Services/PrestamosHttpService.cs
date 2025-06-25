@@ -79,11 +79,31 @@ namespace BiblioSol.Shared.Services
             }
         }
 
+        public async Task<OperationResult<PrestamoAddDto>> AddSolicitudAsync(PrestamoAddDto dto)
+        {
+            try
+            {
+                var response = await _client.PostAsJsonAsync("Prestamo/SolicitarPrestamo", dto);
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<OperationResult<PrestamoAddDto>>();
+                    return result ?? new OperationResult<PrestamoAddDto> { isSuccess = false, Message = "Response null" };
+                }
+
+                return new OperationResult<PrestamoAddDto> { isSuccess = false, Message = "Failed to create prestamo" };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating prestamo");
+                return new OperationResult<PrestamoAddDto> { isSuccess = false, Message = ex.Message };
+            }
+        }
+
         public async Task<OperationResult<object>> UpdateAsync(int id, PrestamoUpdateDto dto)
         {
             try
             {
-                var response = await _client.PutAsJsonAsync($"Prestamo/UpdatePrestamoById?id={id}", dto);
+                var response = await _client.PutAsJsonAsync($"Prestamo/UpdatePrestamo?id={id}", dto);
                 if (response.IsSuccessStatusCode)
                 {
                     return new OperationResult<object> { isSuccess = true };

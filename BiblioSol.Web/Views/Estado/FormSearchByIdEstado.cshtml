@@ -1,0 +1,17 @@
+﻿
+<h1>Search status by Id</h1>
+
+
+<form asp-action="GetEstadoById" method="get">
+    <div class="form-group">
+        <label for="id">Status ID:</label>
+        <input type="number" class="form-control" name="id" id="id" required />
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+</form>
+
+<hr />
+
+<div>
+    <a asp-action="GetAllEstados">Back to List</a>
+</div>

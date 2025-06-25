@@ -1,17 +1,16 @@
 ﻿@model BiblioSol.Shared.Dtos.PrestamosDtos.PrestamoAddDto
 
 @{
-    ViewData["Title"] = "AddPrestamo";
+    ViewData["Title"] = "AddSolicitudPrestamo";
 }
 
-<h1>Add Loan</h1>
+<h1>Add Solicitud Prestamo</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddPrestamo">
+        <form asp-action="AddSolicitudPrestamo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
+ <div class="form-group">
                 <label asp-for="libroId" class="control-label"></label>
                 <input asp-for="libroId" class="form-control" />
                 <span asp-validation-for="libroId" class="text-danger"></span>
@@ -52,7 +51,6 @@
                     <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
                 </label>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -65,7 +63,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -9,81 +9,50 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idPrestamo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idPrestamo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombreCliente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombreCliente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.libroId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.libroId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.diasRetraso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.diasRetraso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.monto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.monto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.penalizado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.penalizado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.estadoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.estadoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaCreacion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.fechaCreacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.usuarioCreacionId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.usuarioCreacionId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaMod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.fechaMod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.usuarioMod)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.usuarioMod)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.active)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.active)
-        </dd>
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.idPrestamo)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.idPrestamo)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.nombreCliente)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.nombreCliente)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.libroId)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.libroId)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fechaCompromiso)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.fechaCompromiso)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fechaDevolucion)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.fechaDevolucion)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.diasRetraso)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.diasRetraso)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.monto)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.monto)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.penalizado)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.penalizado)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.estadoId)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.estadoId)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fechaCreacion)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.fechaCreacion)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.usuarioCreacionId)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.usuarioCreacionId)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.fechaMod)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.fechaMod)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.usuarioMod)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.usuarioMod)</dd>
+
+        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.active)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.active)</dd>
     </dl>
 </div>
-<div>
 
+<div>
     <a asp-action="GetAllPrestamos">Back to List</a>
 </div>

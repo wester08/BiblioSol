@@ -1,0 +1,102 @@
+﻿@model BiblioSol.Shared.Dtos.LibrosDtos.LibroAddDto
+
+@{
+    ViewData["Title"] = "AddLibro";
+}
+
+<h1>Add Book</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddLibro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="titulo" class="control-label"></label>
+                <input asp-for="titulo" class="form-control" />
+                <span asp-validation-for="titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numeroPaginas" class="control-label"></label>
+                <input asp-for="numeroPaginas" class="form-control" />
+                <span asp-validation-for="numeroPaginas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="isbn" class="control-label"></label>
+                <input asp-for="isbn" class="form-control" />
+                <span asp-validation-for="isbn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="autorId" class="control-label"></label>
+                <input asp-for="autorId" class="form-control" />
+                <span asp-validation-for="autorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="editorialId" class="control-label"></label>
+                <input asp-for="editorialId" class="form-control" />
+                <span asp-validation-for="editorialId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="anioPublicacion" class="control-label"></label>
+                <input asp-for="anioPublicacion" class="form-control" type="date" />
+                <span asp-validation-for="anioPublicacion" class="text-danger"></span>
+                    </div>
+            <div class="form-group">
+                <label asp-for="categoriaId" class="control-label"></label>
+                <input asp-for="categoriaId" class="form-control" />
+                <span asp-validation-for="categoriaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precio" class="control-label"></label>
+                <input asp-for="precio" class="form-control" />
+                <span asp-validation-for="precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="stock" class="control-label"></label>
+                <input asp-for="stock" class="form-control" />
+                <span asp-validation-for="stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estadoId" class="control-label"></label>
+                <input asp-for="estadoId" class="form-control" />
+                <span asp-validation-for="estadoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="idioma" class="control-label"></label>
+                <input asp-for="idioma" class="form-control" />
+                <span asp-validation-for="idioma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaCreacion" class="control-label"></label>
+                <input asp-for="fechaCreacion" class="form-control" />
+                <span asp-validation-for="fechaCreacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usuarioCreacionId" class="control-label"></label>
+                <input asp-for="usuarioCreacionId" class="form-control" />
+                <span asp-validation-for="usuarioCreacionId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetAllLibros">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

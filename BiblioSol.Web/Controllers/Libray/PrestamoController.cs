@@ -1,5 +1,5 @@
-﻿using BiblioSol.Shared.Dtos;
-using BiblioSol.Shared.Dtos.PrestamosDtos;
+﻿using BiblioSol.Shared.Dtos.PrestamosDtos;
+using BiblioSol.Shared.Extensions.Library;
 using BiblioSol.Shared.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,18 +70,38 @@ namespace BiblioSol.Web.Controllers.Libray
             return View(dto);
         }
 
+        public IActionResult AddSolicitudPrestamo()
+        {
+            return View();
+        }
+
+        // POST: /Prestamo/AddPrestamo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddSolicitudPrestamo(PrestamoAddDto dto)
+        {
+            if (!ModelState.IsValid)
+                return View(dto);
+
+            var result = await _service.AddSolicitudAsync(dto);
+            if (result.isSuccess)
+            {
+                return RedirectToAction(nameof(GetAllPrestamos));
+            }
+
+            ModelState.AddModelError(string.Empty, result.Message);
+            return View(dto);
+        }
+
+
+
         // GET: /Prestamo/UpdatePrestamoById/5
         public async Task<IActionResult> UpdatePrestamoById(int id)
         {
             var result = await _service.GetByIdAsync(id);
             if (result.isSuccess)
             {
-                var updateDto = new PrestamoUpdateDto
-                {
-                    idPrestamo = result.Data.idPrestamo,
-                    fechaDevolucion = result.Data.fechaDevolucion,
-                    //Terminar de mapear los demás campos necesarios
-                };
+                var updateDto = result.Data.ToUpdatePrestamoDto();
 
                 return View(updateDto);
             }

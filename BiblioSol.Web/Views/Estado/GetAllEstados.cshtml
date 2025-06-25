@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BiblioSol.Shared.Dtos.EstadoDtos.EstadoDto>
+
+@{
+    ViewData["Title"] = "GetAllEstados";
+}
+
+<h1>Status List</h1>
+
+<p>
+    <a asp-action="AddEstado">Create New</a>
+</p>
+<p>
+    <a asp-action="FormSearchByIdEstado">Search by Id</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idEstado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioCreacionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioCreacionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.active)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "UpdateEstadoById", new { id = item.idEstado })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
