@@ -7,7 +7,7 @@
 <h1>Loans List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="AddPrestamo">Create New</a>
 </p>
 <p>
     <a asp-action="FormSearchByIdPrestamo">Search by Id</a>
@@ -94,7 +94,7 @@
                 @Html.DisplayFor(modelItem => item.active)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.idPrestamo }) |
+                    @Html.ActionLink("Edit", "UpdatePrestamoById", new { id = item.idPrestamo })
             </td>
         </tr>
 }

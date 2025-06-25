@@ -1,6 +1,4 @@
-﻿
-
-namespace BiblioSol.Shared.Dtos
+﻿namespace BiblioSol.Shared.Dtos.CategoryDtos
 {
     public record UpdateCategoryDto
     {

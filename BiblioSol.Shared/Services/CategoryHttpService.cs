@@ -1,12 +1,12 @@
 ﻿
 
 using BiblioSol.Shared.Configurations;
-using BiblioSol.Shared.Dtos;
 using System.Net.Http.Json;
 using BiblioSol.Shared.Interfaces;
 using BiblioSol.Shared.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using BiblioSol.Shared.Dtos.CategoryDtos;
 
 namespace BiblioSol.Shared.Services
 {

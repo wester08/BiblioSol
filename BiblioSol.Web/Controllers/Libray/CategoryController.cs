@@ -1,4 +1,5 @@
-﻿using BiblioSol.Shared.Dtos;
+﻿using BiblioSol.Shared.Extensions;
+using BiblioSol.Shared.Dtos.CategoryDtos;
 using BiblioSol.Shared.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -75,16 +76,9 @@ namespace BiblioSol.Web.Controllers.Libray
             var result = await _service.GetByIdAsync(id);
             if (result.isSuccess)
             {
-                var updateDto = new UpdateCategoryDto
-                {
-                    idCategoria = result.Data.idCategoria,
-                    descripcion = result.Data.descripcion,
-                    fechaModificacion = result.Data.fechaMod,
-                    usuarioModificacionId = result.Data.usuarioMod, 
-                    active = result.Data.active
-                };
-
+                var updateDto = result.Data.ToUpdateDto();
                 return View(updateDto);
+
             }
 
             ModelState.AddModelError(string.Empty, result.Message);

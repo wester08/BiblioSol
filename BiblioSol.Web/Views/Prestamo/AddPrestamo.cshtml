@@ -1,21 +1,29 @@
-﻿@using BiblioSol.Shared.Dtos.CategoryDtos
-@model AddCategoryDto
+﻿@model BiblioSol.Shared.Dtos.PrestamosDtos.PrestamoAddDto
 
 @{
-    ViewData["Title"] = "AddCategoria";
+    ViewData["Title"] = "AddPrestamo";
 }
 
-<h1>Add Category</h1>
+<h1>Add Loan</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddCategoria">
+        <form asp-action="AddPrestamo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group">
-                <label asp-for="descripcion" class="control-label"></label>
-                <input asp-for="descripcion" class="form-control" />
-                <span asp-validation-for="descripcion" class="text-danger"></span>
+                <label asp-for="libroId" class="control-label"></label>
+                <input asp-for="libroId" class="form-control" />
+                <span asp-validation-for="libroId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nombreCliente" class="control-label"></label>
+                <input asp-for="nombreCliente" class="form-control" />
+                <span asp-validation-for="nombreCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="estadoId" class="control-label"></label>
+                <input asp-for="estadoId" class="form-control" />
+                <span asp-validation-for="estadoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="fechaCreacion" class="control-label"></label>
@@ -27,7 +35,6 @@
                 <input asp-for="usuarioCreacionId" class="form-control" />
                 <span asp-validation-for="usuarioCreacionId" class="text-danger"></span>
             </div>
-
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
@@ -41,7 +48,7 @@
 </div>
 
 <div>
-    <a asp-action="GetAllCategoria">Back to List</a>
+    <a asp-action="GetAllPrestamos">Back to List</a>
 </div>
 
 @section Scripts {

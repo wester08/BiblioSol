@@ -1,6 +1,4 @@
-﻿
-
-using BiblioSol.Shared.Dtos;
+﻿using BiblioSol.Shared.Dtos.CategoryDtos;
 using BiblioSol.Shared.Models;
 
 namespace BiblioSol.Shared.Interfaces
