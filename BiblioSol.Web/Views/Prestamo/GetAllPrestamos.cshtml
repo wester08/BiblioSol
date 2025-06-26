@@ -1,63 +1,77 @@
 ﻿@model IEnumerable<BiblioSol.Shared.Dtos.PrestamosDtos.PrestamoDto>
 
 @{
-    ViewData["Title"] = "GetAllPrestamos";
+    ViewData["Title"] = "Listado de Préstamos";
 }
 
-<h1>Loans List</h1>
+<div class="container-fluid px-4 py-3"> <!-- Espacio alrededor -->
+    <div class="text-start mb-3">
+        <h2 class="mb-4 text-primary">Listado de Préstamos</h2>
 
-<p>
-    <a asp-action="AddPrestamo">Create New</a>
-</p>
-<p>
-    <a asp-action="AddSolicitudPrestamo">create new loan application</a>
-</p>
-<p>
-    <a asp-action="FormSearchByIdPrestamo">Search by Id</a>
-</p>
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-action="AddPrestamo" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Nuevo Préstamo
+            </a>
+            <a asp-action="AddSolicitudPrestamo" class="btn btn-info text-white">
+                <i class="bi bi-file-earmark-plus"></i> Nueva Solicitud
+            </a>
+            <a asp-action="FormSearchByIdPrestamo" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i> Buscar por ID
+            </a>
+        </div>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.idPrestamo)</th>
-            <th>@Html.DisplayNameFor(model => model.nombreCliente)</th>
-            <th>@Html.DisplayNameFor(model => model.libroId)</th>
-            <th>@Html.DisplayNameFor(model => model.fechaCompromiso)</th>
-            <th>@Html.DisplayNameFor(model => model.fechaDevolucion)</th>
-            <th>@Html.DisplayNameFor(model => model.diasRetraso)</th>
-            <th>@Html.DisplayNameFor(model => model.monto)</th>
-            <th>@Html.DisplayNameFor(model => model.penalizado)</th>
-            <th>@Html.DisplayNameFor(model => model.estadoId)</th>
-            <th>@Html.DisplayNameFor(model => model.fechaCreacion)</th>
-            <th>@Html.DisplayNameFor(model => model.usuarioCreacionId)</th>
-            <th>@Html.DisplayNameFor(model => model.fechaMod)</th>
-            <th>@Html.DisplayNameFor(model => model.usuarioMod)</th>
-            <th>@Html.DisplayNameFor(model => model.active)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.idPrestamo)</td>
-                <td>@Html.DisplayFor(modelItem => item.nombreCliente)</td>
-                <td>@Html.DisplayFor(modelItem => item.libroId)</td>
-                <td>@Html.DisplayFor(modelItem => item.fechaCompromiso)</td>
-                <td>@Html.DisplayFor(modelItem => item.fechaDevolucion)</td>
-                <td>@Html.DisplayFor(modelItem => item.diasRetraso)</td>
-                <td>@Html.DisplayFor(modelItem => item.monto)</td>
-                <td>@Html.DisplayFor(modelItem => item.penalizado)</td>
-                <td>@Html.DisplayFor(modelItem => item.estadoId)</td>
-                <td>@Html.DisplayFor(modelItem => item.fechaCreacion)</td>
-                <td>@Html.DisplayFor(modelItem => item.usuarioCreacionId)</td>
-                <td>@Html.DisplayFor(modelItem => item.fechaMod)</td>
-                <td>@Html.DisplayFor(modelItem => item.usuarioMod)</td>
-                <td>@Html.DisplayFor(modelItem => item.active)</td>
-                <td>
-                    @Html.ActionLink("Edit", "UpdatePrestamoById", new { id = item.idPrestamo })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped shadow-sm">
+            <thead style="background-color: #cce5ff;">
+                <tr class="text-nowrap">
+                    <th>@Html.DisplayNameFor(model => model.First().idPrestamo)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().nombreCliente)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().libroId)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().fechaCompromiso)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().fechaDevolucion)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().diasRetraso)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().monto)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().penalizado)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().estadoId)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().fechaCreacion)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().usuarioCreacionId)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().fechaMod)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().usuarioMod)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().active)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                        <tr class="text-nowrap">
+                            <td>@item.idPrestamo</td>
+                            <td class="text-truncate" style="max-width: 200px;">@item.nombreCliente</td>
+                            <td>@item.libroId</td>
+                            <td>@item.fechaCompromiso.ToString("yyyy-MM-dd")</td>
+                            <td>@item.fechaDevolucion?.ToString("yyyy-MM-dd")</td>
+                            <td>@item.diasRetraso</td>
+                            <td>@item.monto.ToString("C")</td>
+                            <td>@(item.penalizado ? "Sí" : "No")</td>
+                            <td>@item.estadoId</td>
+                            <td>@item.fechaCreacion.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@item.usuarioCreacionId</td>
+                            <td>@item.fechaMod?.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@item.usuarioMod</td>
+                            <td>
+                                <span class="badge bg-@(item.active ? "success" : "secondary")">
+                                @(item.active ? "Activo" : "Inactivo")
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="UpdatePrestamoById" asp-route-id="@item.idPrestamo" class="btn btn-sm btn-warning">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

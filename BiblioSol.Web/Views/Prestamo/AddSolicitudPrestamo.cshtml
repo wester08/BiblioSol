@@ -1,67 +1,73 @@
 ﻿@model BiblioSol.Shared.Dtos.PrestamosDtos.PrestamoAddDto
 
 @{
-    ViewData["Title"] = "AddSolicitudPrestamo";
+    ViewData["Title"] = "Nueva Solicitud de Préstamo";
 }
 
-<h1>Add Solicitud Prestamo</h1>
+<h2 class="mb-4 text-primary">Solicitar Préstamo</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddSolicitudPrestamo">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
- <div class="form-group">
-                <label asp-for="libroId" class="control-label"></label>
+    <div class="col-md-6">
+        <form asp-action="AddSolicitudPrestamo" class="border p-4 rounded shadow-sm bg-light">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="libroId" class="form-label fw-bold">ID del Libro</label>
                 <input asp-for="libroId" class="form-control" />
-                <span asp-validation-for="libroId" class="text-danger"></span>
+                <span asp-validation-for="libroId" class="text-danger small"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="nombreCliente" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="nombreCliente" class="form-label fw-bold">Nombre del Cliente</label>
                 <input asp-for="nombreCliente" class="form-control" />
-                <span asp-validation-for="nombreCliente" class="text-danger"></span>
+                <span asp-validation-for="nombreCliente" class="text-danger small"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="fechaCompromiso" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="fechaCompromiso" class="form-label fw-bold">Fecha Compromiso</label>
                 <input asp-for="fechaCompromiso" class="form-control" type="date" />
-                <span asp-validation-for="fechaCompromiso" class="text-danger"></span>
+                <span asp-validation-for="fechaCompromiso" class="text-danger small"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="estadoId" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="estadoId" class="form-label fw-bold">ID Estado</label>
                 <input asp-for="estadoId" class="form-control" />
-                <span asp-validation-for="estadoId" class="text-danger"></span>
+                <span asp-validation-for="estadoId" class="text-danger small"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="fechaCreacion" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="fechaCreacion" class="form-label fw-bold">Fecha de Creación</label>
                 <input asp-for="fechaCreacion" class="form-control" type="datetime-local" />
-                <span asp-validation-for="fechaCreacion" class="text-danger"></span>
+                <span asp-validation-for="fechaCreacion" class="text-danger small"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="usuarioCreacionId" class="control-label"></label>
+            <div class="mb-3">
+                <label asp-for="usuarioCreacionId" class="form-label fw-bold">Usuario Creación ID</label>
                 <input asp-for="usuarioCreacionId" class="form-control" />
-                <span asp-validation-for="usuarioCreacionId" class="text-danger"></span>
+                <span asp-validation-for="usuarioCreacionId" class="text-danger small"></span>
             </div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
+            <div class="form-check mb-4">
+                <input class="form-check-input" asp-for="active" />
+                <label class="form-check-label fw-bold" asp-for="active">
+                    ¿Activo?
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="GetAllPrestamos" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left-circle"></i> Volver
+                </a>
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-send-check"></i> Enviar Solicitud
+                </button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="GetAllPrestamos">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

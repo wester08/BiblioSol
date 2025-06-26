@@ -1,87 +1,100 @@
 ﻿@model BiblioSol.Shared.Dtos.PrestamosDtos.PrestamoUpdateDto
 
 @{
-    ViewData["Title"] = "UpdatePrestamoById";
+    ViewData["Title"] = "Actualizar Préstamo";
 }
 
-<h1>UpdatePrestamoById</h1>
+<h2 class="text-primary mb-4">Actualizar Préstamo</h2>
 
-<h4>PrestamoUpdateDto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card shadow mb-4">
+    <div class="card-body">
         <form asp-action="UpdatePrestamoById">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="idPrestamo" class="control-label"></label>
-                <input asp-for="idPrestamo" class="form-control" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="idPrestamo" class="form-label"></label>
+                <input asp-for="idPrestamo" class="form-control" readonly />
                 <span asp-validation-for="idPrestamo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="nombreCliente" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="nombreCliente" class="form-label"></label>
                 <input asp-for="nombreCliente" class="form-control" />
                 <span asp-validation-for="nombreCliente" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="libroId" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="libroId" class="form-label"></label>
                 <input asp-for="libroId" class="form-control" />
                 <span asp-validation-for="libroId" class="text-danger"></span>
             </div>
-                        <div class="form-group">
-                <label asp-for="fechaCompromiso" class="control-label"></label>
-                <input asp-for="fechaCompromiso" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="fechaCompromiso" class="form-label"></label>
+                <input asp-for="fechaCompromiso" class="form-control" type="date" />
                 <span asp-validation-for="fechaCompromiso" class="text-danger"></span>
-             <div class="form-group">
-			<div class="form-group">
-				<label asp-for="fechaDevolucion" class="control-label"></label>
-				<input asp-for="fechaDevolucion" class="form-control" />
-				<span asp-validation-for="fechaDevolucion" class="text-danger"></span>
-             <div class="form-group">
-                <label asp-for="diasRetraso" class="control-label"></label>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="fechaDevolucion" class="form-label"></label>
+                <input asp-for="fechaDevolucion" class="form-control" type="date" />
+                <span asp-validation-for="fechaDevolucion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="diasRetraso" class="form-label"></label>
                 <input asp-for="diasRetraso" class="form-control" />
                 <span asp-validation-for="diasRetraso" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="monto" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="monto" class="form-label"></label>
                 <input asp-for="monto" class="form-control" />
                 <span asp-validation-for="monto" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="penalizado" /> @Html.DisplayNameFor(model => model.penalizado)
-                </label>
+
+            <div class="form-check mb-3">
+                <input asp-for="penalizado" class="form-check-input" />
+                <label asp-for="penalizado" class="form-check-label"></label>
             </div>
-            <div class="form-group">
-                <label asp-for="estadoId" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="estadoId" class="form-label"></label>
                 <input asp-for="estadoId" class="form-control" />
                 <span asp-validation-for="estadoId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="fechaMod" class="control-label"></label>
-                <input asp-for="fechaMod" class="form-control" />
+
+            <div class="mb-3">
+                <label asp-for="fechaMod" class="form-label"></label>
+                <input asp-for="fechaMod" class="form-control" type="datetime-local" />
                 <span asp-validation-for="fechaMod" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="usuarioMod" class="control-label"></label>
+
+            <div class="mb-3">
+                <label asp-for="usuarioMod" class="form-label"></label>
                 <input asp-for="usuarioMod" class="form-control" />
                 <span asp-validation-for="usuarioMod" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="active" /> @Html.DisplayNameFor(model => model.active)
-                </label>
+
+            <div class="form-check mb-4">
+                <input asp-for="active" class="form-check-input" />
+                <label asp-for="active" class="form-check-label"></label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Guardar cambios
+                </button>
+                <a asp-action="GetAllPrestamos" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver al listado
+                </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="GetAllPrestamos">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
