@@ -1,6 +1,5 @@
 ﻿
 using BiblioSol.Application.DTOs.Library.Autor;
-using BiblioSol.Application.DTOs.Library.Category;
 using BiblioSol.Application.Extentions.Library;
 using BiblioSol.Application.Interfaces.Respositories.Library;
 using BiblioSol.Application.Interfaces.Services.Library;
@@ -66,7 +65,8 @@ namespace BiblioSol.Application.Services.Library
                 var result = await _autorRepository.GetByIdAsync(id);
                 if (result.IsSuccess && result.Data is not null)
                 {
-                    var author = result.Data.ToDAto as Autor;
+                    var author = result.Data as Autor;
+
                     operationResult = OperationResult.Success("Author retrieved successfully.", author);
                 }
                 else

@@ -44,6 +44,7 @@ namespace BiblioSol.Application.Extentions.Library
             };
         }
 
+
         public static AutorDto ToADto(this Autor entity)
         {
             return new AutorDto
@@ -51,7 +52,7 @@ namespace BiblioSol.Application.Extentions.Library
                 idAutor = entity.idAutor,
                 nombre = entity.nombre,
                 apellido = entity.apellido,
-                fechaCreacion = entity.fechaCreacion ,
+                fechaCreacion = entity.fechaCreacion,
                 usuarioCreacionId = entity.usuarioCreacionId,
                 fechaMod = entity.fechaMod,
                 usuarioMod = entity.usuarioMod,

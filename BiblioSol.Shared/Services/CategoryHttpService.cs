@@ -44,7 +44,6 @@ namespace BiblioSol.Shared.Services
             }
         }
 
-        // Los demás métodos (GetByIdAsync, CreateAsync, UpdateAsync, DeleteAsync) siguen un patrón similar
         public async Task<OperationResult<CategoryDto>> GetByIdAsync(int id)
         {
             try

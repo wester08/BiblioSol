@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BiblioSol.Shared.Dtos.AutorDtos.AutorDto>
+
+@{
+    ViewData["Title"] = "GetAllAutores";
+}
+
+<h1>Authors List.</h1>
+
+<p>
+    <a asp-action="AddAutor">Create New</a>
+</p>
+<p>
+    <a asp-action="FormSearchByIdAutor">Search by Id</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idAutor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioCreacionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuarioMod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idAutor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioCreacionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuarioMod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.active)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "UpdateAutor", new { id = item.idAutor })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
